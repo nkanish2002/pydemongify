@@ -13,6 +13,7 @@ data_types = {
     "Boolean": bool
 }
 
+
 class NestedModelProcessor:
     def __init__(self, key, model, foreign_key_list):
         self.key = key
@@ -62,6 +63,6 @@ class ModelProcessor:
                     if "type" in column.info:
                         value = column.info["type"](value)
             obj.__dict__[column.key] = value
-        for nest in nested_data:
+        for nest in self.nested_data:
             nest.insert_bson_entry(bdata, session)
         session.add(obj)
